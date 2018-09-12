@@ -6,14 +6,22 @@ import './App.css';
 import Menu from './components/MenuComponent'; 
 import { DISHES } from './shared/dishes';
 
-
 class App extends Component {
+  
+//////////////////////////////////////////////////////////////////////////////////////
+
+/* List DISH Props Contructor */
+
   constructor(props) {
     super(props);
     this.state = {
       dishes: DISHES
     };
   }
+//////////////////////////////////////////////////////////////////////////////////////
+
+/* Render the Navbar */
+
   render() {
     return (
       <div className="App">
@@ -23,10 +31,11 @@ class App extends Component {
       </div>
       </Navbar>
   <Menu dishes={this.state.dishes} />
-
       </div>
     );
   }
+  
+//////////////////////////////////////////////////////////////////////////////////////
 }
 
 export default App;
