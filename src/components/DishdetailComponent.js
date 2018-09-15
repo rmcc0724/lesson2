@@ -1,45 +1,29 @@
-import React, { Component } from 'react';
-// eslint-disable-next-line
-import { Media } from 'reactstrap';
-import {
-    Card,
-    CardImg,
-    CardImgOverlay,
-    // eslint-disable-next-line
-    CardText,
-    // eslint-disable-next-line
-    CardBody,
-    CardTitle
-}
-from 'reactstrap';
+import React from 'react';
+import { Card, CardImg, CardText, CardBody } from 'reactstrap';
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-/* Selected DISH Props Contructor */
-
-class DishDetail extends Component {
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    /* renderDish function takes the selected dish and returns the Card data */
-    renderDish() {
-        return (
-            <div className="col-12 col-md-5 m-1">
+/* renderDish function takes the selected dish and returns the Card data */
+function RenderDish({ dish }) {
+    return (
+        <div className="col-12 col-md-5 m-1">
                <Card>
-                    <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
+                    <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
-                      <CardText>{this.props.dish.name}</CardText>    
-                      <CardText>{this.props.dish.description}</CardText>    
+                      <CardText>{dish.name}</CardText>    
+                      <CardText>{dish.description}</CardText>    
                     </CardBody>
                 </Card>
                  </div>
-        );
-    }
-    //////////////////////////////////////////////////////////////////////////////////////
-    /* renderDish function takes the selected dish and returns the Card data */
-    renderComments(commentList) {
+    );
+}
+//////////////////////////////////////////////////////////////////////////////////////
+/* renderDish function takes the selected dish and returns the Card data */
+function RenderComments({ commentList }) {
 
-        return (
-            <div  className="col-12 col-md-5 m-1">
+    return (
+        <div  className="col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                       <ul className="list-unstyled">
                               {commentList.map((comments) => {
@@ -53,26 +37,26 @@ class DishDetail extends Component {
                               })}
                     </ul>
                 </div>
-        );
-    }
+    );
+}
 
-    //////////////////////////////////////////////////////////////////////////////////////
-    /* Render the selected DISH component from the dish variable we created <DishDetail dish=......./> */
-    render() {
-        if (this.props.dish != null) {
-            return (
-                <div className="container">
+//////////////////////////////////////////////////////////////////////////////////////
+/* Render the selected DISH component from the dish variable we created <DishDetail dish=......./> */
+const DishDetail = (props) => {
+    if (props.dish != null) {
+        return (
+            <div className="container">
                 <div className="row">
-                {this.renderDish(this.props.dish)}
-                {this.renderComments(this.props.dish.comments)}
+                <RenderDish dish={(props.dish)}/>
+                <RenderComments commentList={(props.dish.comments)}/>
                 </div>
                                 </div>
 
-            );
-        }
-        else {
-            return (<div></div>);
-        }
+        );
     }
-}
+    else {
+        return (<div></div>);
+    }
+};
+
 export default DishDetail;
