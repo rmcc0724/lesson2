@@ -1,41 +1,21 @@
 import React, { Component } from 'react';
-// eslint-disable-next-line 
-import logo from './logo.svg';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Main from './components/MainComponent';
 import './App.css';
-import Menu from './components/MenuComponent'; 
-import { DISHES } from './shared/dishes';
 
 class App extends Component {
-  
-//////////////////////////////////////////////////////////////////////////////////////
 
-/* List DISH Props Contructor */
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES
-    };
-  }
-//////////////////////////////////////////////////////////////////////////////////////
-
-/* Render the Navbar */
+  //////////////////////////////////////////////////////////////////////////////////////
+    /* Render the Navbar */
 
   render() {
     return (
       <div className="App">
-      <Navbar dark color="primary">
-      <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-      </div>
-      </Navbar>
-  <Menu dishes={this.state.dishes} />
+        <Main />
       </div>
     );
   }
-  
-//////////////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////////////////////////////////////////////////////////
 }
 
 export default App;

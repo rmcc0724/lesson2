@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line
+import { Media } from 'reactstrap';
 import {
     Card,
     CardImg,
+    CardImgOverlay,
+    // eslint-disable-next-line
     CardText,
+    // eslint-disable-next-line
     CardBody,
     CardTitle
 }
 from 'reactstrap';
+
+
 //////////////////////////////////////////////////////////////////////////////////////
 /* Selected DISH Props Contructor */
 
@@ -14,44 +21,53 @@ class DishDetail extends Component {
 
     //////////////////////////////////////////////////////////////////////////////////////
     /* renderDish function takes the selected dish and returns the Card data */
-    renderDish(selected) {
+    renderDish() {
         return (
-            <Card key={selected.id}>
-                    <CardImg top src={selected.image} alt={selected.name} />
+            <div className="col-12 col-md-5 m-1">
+               <Card>
+                    <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
                     <CardBody>
-                      <CardText>{selected.description}</CardText>    
-                      <CardText>{selected.price}</CardText>    
-                      <CardText>{selected.label}</CardText>    
+                      <CardText>{this.props.dish.name}</CardText>    
+                      <CardText>{this.props.dish.description}</CardText>    
                     </CardBody>
                 </Card>
+                 </div>
         );
     }
     //////////////////////////////////////////////////////////////////////////////////////
     /* renderDish function takes the selected dish and returns the Card data */
-    renderComments(selected) {
-        const selectedMap = selected.map((commentList) => {
-            return (
-                <div key={commentList.id}>
-                      <p>{commentList.comment}</p>
-                      <p>-- {commentList.author}  {convertDate(commentList.date)}</p>
-             </div>);
-        });
-        return selectedMap;
+    renderComments(commentList) {
+
+        return (
+            <div  className="col-12 col-md-5 m-1">
+                <h4>Comments</h4>
+                      <ul className="list-unstyled">
+                              {commentList.map((comments) => {
+                              return (
+                      <li key={comments.id}>
+                      <p>{comments.comment}<br/>
+                      -- {comments.author}  {new Intl.DateTimeFormat('en-US',
+                           { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(comments.date))}</p>
+                        </li>
+                              );
+                              })}
+                    </ul>
+                </div>
+        );
     }
+
     //////////////////////////////////////////////////////////////////////////////////////
     /* Render the selected DISH component from the dish variable we created <DishDetail dish=......./> */
     render() {
         if (this.props.dish != null) {
             return (
+                <div className="container">
                 <div className="row">
-                  <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.props.dish)}
-                  </div>
-                 <div  className="col-12 col-md-5 m-1">
-                     <h4>Comments</h4>
-                    {this.renderComments(this.props.dish.comments)}
+                {this.renderDish(this.props.dish)}
+                {this.renderComments(this.props.dish.comments)}
                 </div>
-                 </div>
+                                </div>
+
             );
         }
         else {
@@ -60,54 +76,3 @@ class DishDetail extends Component {
     }
 }
 export default DishDetail;
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-/* Custom Functions */
-
-
-function convertDate(arg) {
-    var newDate = new Date(arg);
-    return convertMonth(newDate.getMonth() + 1) + " " + newDate.getDate() + ", " + newDate.getFullYear();
-}
-
-function convertMonth(month) {
-    switch (month) {
-        case 1:
-            month = "Jan.";
-            break;
-        case 2:
-            month = "Feb.";
-            break;
-        case 3:
-            month = "Mar.";
-            break;
-        case 4:
-            month = "Apr.";
-            break;
-        case 5:
-            month = "May";
-            break;
-        case 6:
-            month = "Jun.";
-            break;
-        case 7:
-            month = "Jul.";
-            break;
-        case 8:
-            month = "Aug.";
-            break;
-        case 9:
-            month = "Sept.";
-            break;
-        case 10:
-            month = "Oct.";
-            break;
-        case 11:
-            month = "Nov.";
-            break;
-        case 12:
-            month = "Dec.";
-    }
-    return month;
-}
