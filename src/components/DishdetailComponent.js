@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody } from 'reactstrap';
 
-
-
 //////////////////////////////////////////////////////////////////////////////////////
-/* renderDish function takes the selected dish and returns the Card data */
-function RenderDish({ dish }) {
+/* This is the functional component for the selected Dish detail presentational component */
+const RenderDish = ({ dish }) => {
     return (
         <div className="col-12 col-md-5 m-1">
                <Card>
@@ -17,10 +15,11 @@ function RenderDish({ dish }) {
                 </Card>
                  </div>
     );
-}
+};
+
 //////////////////////////////////////////////////////////////////////////////////////
-/* renderDish function takes the selected dish and returns the Card data */
-function RenderComments({ commentList }) {
+/* This is the functional component for the selected Dish comments presentational component */
+const RenderComments = ({ commentList }) => {
 
     return (
         <div  className="col-12 col-md-5 m-1">
@@ -38,10 +37,10 @@ function RenderComments({ commentList }) {
                     </ul>
                 </div>
     );
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////
-/* Render the selected DISH component from the dish variable we created <DishDetail dish=......./> */
+/* This is the container for the DishDetail component, it takes the selected dish props as an arg and passes to the functional components above */
 const DishDetail = (props) => {
     if (props.dish != null) {
         return (
@@ -50,8 +49,7 @@ const DishDetail = (props) => {
                 <RenderDish dish={(props.dish)}/>
                 <RenderComments commentList={(props.dish.comments)}/>
                 </div>
-                                </div>
-
+            </div>
         );
     }
     else {
