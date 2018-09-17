@@ -35,7 +35,7 @@ class Main extends Component {
     return (
       <div>
         <Header/>
-          <Switch>
+           <Switch>
               <Route path='/home' component={HomePage} />
               <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
               <Redirect to="/home" />
