@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import Main from './components/MainComponent';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
 
   //////////////////////////////////////////////////////////////////////////////////////
-    /* Render the Navbar */
+  /* Render the Navbar */
 
   render() {
-    return (
+      return (
+          <BrowserRouter>
       <div className="App">
         <Main />
       </div>
+          </BrowserRouter>
+
     );
   }
 
