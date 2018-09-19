@@ -12,7 +12,6 @@ import {
 from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-
 const RenderMenuItem = ({ dish, onClick }) => {
   return (
     <Card>
