@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 class Contact extends Component {
 
@@ -84,6 +86,16 @@ class Contact extends Component {
         const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
         return (
             <div className="container">
+            <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>Contact</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>Contact</h3>
+                        <hr />
+                    </div>                
+                </div>
             <div className="row row-content">
                 <div className="col-12">
                 <h3>Location Information</h3>
