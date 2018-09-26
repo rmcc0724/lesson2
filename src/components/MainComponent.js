@@ -7,11 +7,13 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
 
+//Connects the Main component to the Redux store
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
 
+//Creates an object from the Redux store object <state> and map each state to the variables
+const mapStateToProps = state => {
       return {
       dishes: state.dishes,
       comments: state.comments,
@@ -26,8 +28,7 @@ class Main extends Component {
       return (
         <Home dish={this.props.dishes.filter((dish) => dish.featured)[0]}
           promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
-          leader={this.props.leaders.filter((leader) => leader.featured)[0]}
-          />
+          leader={this.props.leaders.filter((leader) => leader.featured)[0]}/>
       );
     };
     const DishWithId = ({ match }) => {
@@ -47,7 +48,7 @@ class Main extends Component {
               <Route path='/aboutus' component={() => <About leaders={this.props.leaders} />}/>
               <Redirect to="/home" />
           </Switch>
-z        <Footer/>
+        <Footer/>
       </div>
     );
   }
