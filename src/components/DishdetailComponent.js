@@ -6,6 +6,12 @@ import {
     CardBody,
     Breadcrumb,
     BreadcrumbItem,
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    FormGroup,
+    Label
 }
 from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -65,108 +71,6 @@ class CommentForm extends Component {
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </Control.select>
-        </FormGroup>
-        
-                                    
-                                    
-                            <FormGroup>
-                                <Label htmlFor="author">Your Name</Label>
-                                 <Control.text model=".author" id="author" name="author"
-                                        placeholder="Your Name"
-                                        className="form-control"
-                                        validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
-                                        }}
-                                         />
-                                    <Errors
-                                        className="text-danger"
-                                        model=".author"
-                                        show="touched"
-                                        messages={{
-                                            required: 'Required',
-                                            minLength: 'Must be greater than 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
-                                        }}
-                                     />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="message">Comment</Label>
-                                    <Control.textarea model=".message" id="message" name="message"
-                                        rows="12"
-                                        className="form-control" />
-                            </FormGroup>
-                            <Button type="submit" value="submit" color="primary">Submit</Button>
-                        </LocalForm>
-                    </ModalBody>
-                </Modal>
-                </div>
-        );
-    }
-}
-
-//////////////////////////////////////////////////////////////////////////////////////
-/* This is the functional component for the selected Dish detail presentational component */
-const RenderDish = ({ dish }) => {
-    return (
-
-        <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardText>{dish.name}</CardText>    
-                      <CardText>{dish.description}</CardText>    
-                    </CardBody>
-                </Card>
-
-    );
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-/* This is the functional component for the selected Dish comments presentational component */
-const RenderComments = ({ comments, addComment, dishId }) => {
-
-    return (
-        <div className="container">
-                <h4>Comments</h4>
-                      <ul className="list-unstyled">
-                              {comments.map((comments) => {
-                              return (
-                      <li key={comments.id}>
-                      <p>{comments.comment}<br/>
-                      -- {comments.author}  {new Intl.DateTimeFormat('en-US',
-                           { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(comments.date))}</p>
-                        </li>
-                              );
-                              })}
-                              <li>      <CommentForm dishId={dishId} addComment={addComment} />
-</li>
-                    </ul>
-                </div>
-    );
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-/* This is the container for the DishDetail component, it takes the selected dish props as an arg and passes to the functional components above */
-const DishDetail = (props) => {
-    
-            if (props.isLoading) {
-            return(
-                <div className="container">
-                    <div className="row">            
-                        <Loading />
-                    </div>
-                </div>
-            );
-        }
-        else if (props.errMess) {
-            return(
-                <div className="container">
-                    <div className="row">            
-                        <h4>{props.errMess}</h4>
-                    </div>
-                </div>
             <option value="4">4</option>
             <option value="5">5</option>
           </Control.select>
