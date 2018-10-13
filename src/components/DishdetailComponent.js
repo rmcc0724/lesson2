@@ -46,8 +46,8 @@ class CommentForm extends Component {
     handleSubmit(values) {
         console.log("Rating is " + values.rating);
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.message);
-    }
+ this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+ }
 
     render() {
 
@@ -101,7 +101,7 @@ class CommentForm extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="message">Comment</Label>
-                                    <Control.textarea model=".message" id="message" name="message"
+                                    <Control.textarea model=".comment" id="comment" name="comment"
                                         rows="12"
                                         className="form-control" />
                             </FormGroup>
@@ -132,7 +132,7 @@ const RenderDish = ({ dish }) => {
 
 //////////////////////////////////////////////////////////////////////////////////////
 /* This is the functional component for the selected Dish comments presentational component */
-const RenderComments = ({ comments, addComment, dishId }) => {
+const RenderComments = ({ comments, postComment, dishId }) => {
 
     return (
         <div className="container">
@@ -147,7 +147,8 @@ const RenderComments = ({ comments, addComment, dishId }) => {
                         </li>
                               );
                               })}
-                              <li>      <CommentForm dishId={dishId} addComment={addComment} />
+                              <li>                          <CommentForm dishId={dishId} postComment={postComment} />
+
 </li>
                     </ul>
                 </div>
@@ -157,26 +158,26 @@ const RenderComments = ({ comments, addComment, dishId }) => {
 //////////////////////////////////////////////////////////////////////////////////////
 /* This is the container for the DishDetail component, it takes the selected dish props as an arg and passes to the functional components above */
 const DishDetail = (props) => {
-    
-            if (props.isLoading) {
-            return(
-                <div className="container">
+
+    if (props.isLoading) {
+        return (
+            <div className="container">
                     <div className="row">            
                         <Loading />
                     </div>
                 </div>
-            );
-        }
-        else if (props.errMess) {
-            return(
-                <div className="container">
+        );
+    }
+    else if (props.errMess) {
+        return (
+            <div className="container">
                     <div className="row">            
                         <h4>{props.errMess}</h4>
                     </div>
                 </div>
-            );
-        }
-        else if (props.dish != null) {
+        );
+    }
+    else if (props.dish != null) {
         return (
             <div className="container">
                 <div className="row">
@@ -196,7 +197,8 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
       <RenderComments comments={props.comments}
-        addComment={props.addComment}
+                             postComment={props.postComment}
+
         dishId={props.dish.id}
       />
                     </div>
