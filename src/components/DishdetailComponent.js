@@ -15,8 +15,9 @@ import {
 }
 from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 const required = (val) => val && val.length;
@@ -120,7 +121,7 @@ const RenderDish = ({ dish }) => {
     return (
 
         <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                       <CardText>{dish.name}</CardText>    
                       <CardText>{dish.description}</CardText>    
