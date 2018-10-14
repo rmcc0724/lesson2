@@ -1,14 +1,16 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 
 
-const RenderLeader = ({leader}) => {
+const RenderLeader = ({ leader }) => {
     return (
         <Media tag="li" className="my-3">
                   <Media left middle key={leader.id}>
-                      <Media object src={leader.image} alt={leader.name} />
+                      <Media object src={baseUrl + leader.image} alt={leader.name} />
                   </Media>
                   <Media body className="ml-5">
                     <Media heading>{leader.name}</Media>
@@ -22,16 +24,35 @@ const RenderLeader = ({leader}) => {
 
 const About = (props) => {
 
-    const leaders = props.leaders.map((leader) => {
+    if (props.isLoading) {
         return (
-            <div className="col-12" key={leader.id}>
-            <RenderLeader leader={leader} />
-</div>
+            <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
         );
-    });
+    }
+    else if (props.errMess) {
+        return (
+            <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+        );
+    }
+    else if (props.leaders != null) {
+        const leaders = props.leaders.leaders.map((leader) => {
+            return (
+                <div className="col-12" key={leader.id}>
+            <RenderLeader leader={leader} />
+                </div>
+            );
+        });
 
-    return (
-        <div className="container">
+        return (
+            <div className="container">
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
@@ -89,7 +110,8 @@ const About = (props) => {
                     </Media>
             </div>
         </div>
-    );
-};
 
+        )
+    }
+};
 export default About;
