@@ -1,7 +1,6 @@
 ///Imports the ActionType.js file and constructs and object names addComment with args and props dishId, rating, author, comment
 
 import * as ActionTypes from './ActionTypes';
-import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
 export const addComment = (comment) => ({
