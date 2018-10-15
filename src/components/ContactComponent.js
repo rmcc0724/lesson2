@@ -11,6 +11,7 @@ import {
 from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 
+
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -27,7 +28,8 @@ class Contact extends Component {
 
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        // alert('Current State is: ' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.message);
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }
@@ -162,6 +164,12 @@ class Contact extends Component {
                                         }}
                                      />
                                 </Col>
+                            </Row>
+                            
+                           <Row className="form-group">
+                           <Col md={{size: 6, offset: 2}}>
+                                    <Control.checkbox model=".agree" id="agree" name="agree"/> <strong>Can we contact you?</strong>
+                                    </Col>
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="message" md={2}>Your Feedback</Label>
