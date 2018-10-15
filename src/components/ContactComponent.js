@@ -29,7 +29,7 @@ class Contact extends Component {
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         // alert('Current State is: ' + JSON.stringify(values));
-        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.message);
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }
@@ -169,8 +169,15 @@ class Contact extends Component {
                            <Row className="form-group">
                            <Col md={{size: 6, offset: 2}}>
                                     <Control.checkbox model=".agree" id="agree" name="agree"/> <strong>Can we contact you?</strong>
-                                    </Col>
-                            </Row>
+                            </Col>
+                                   <Control.select model=".contactType" 
+                                              id="contactType" 
+                                              name="contactType">
+          <option value="tel">Tel.</option>
+          <option value="email">Email</option>
+
+        </Control.select> 
+ </Row>
                             <Row className="form-group">
                                 <Label htmlFor="message" md={2}>Your Feedback</Label>
                                 <Col md={10}>
