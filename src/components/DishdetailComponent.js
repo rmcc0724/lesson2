@@ -15,8 +15,9 @@ import {
 }
 from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 const required = (val) => val && val.length;
@@ -118,7 +119,11 @@ class CommentForm extends Component {
 /* This is the functional component for the selected Dish detail presentational component */
 const RenderDish = ({ dish }) => {
     return (
-
+<FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
         <Card>
                     <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
@@ -126,7 +131,7 @@ const RenderDish = ({ dish }) => {
                       <CardText>{dish.description}</CardText>    
                     </CardBody>
                 </Card>
-
+            </FadeTransform>
     );
 };
 
@@ -138,17 +143,23 @@ const RenderComments = ({ comments, addComment, dishId }) => {
         <div className="container">
                 <h4>Comments</h4>
                       <ul className="list-unstyled">
+                         <Stagger in>
                               {comments.map((comments) => {
                               return (
+                                                              <Fade in>
+
                       <li key={comments.id}>
                       <p>{comments.comment}<br/>
                       -- {comments.author}  {new Intl.DateTimeFormat('en-US',
                            { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(comments.date))}</p>
                         </li>
+                                                        </Fade>
+
                               );
                               })}
                               <li>      <CommentForm dishId={dishId} addComment={addComment} />
 </li>
+                        </Stagger>
                     </ul>
                 </div>
     );
@@ -209,5 +220,4 @@ const DishDetail = (props) => {
         return (<div></div>);
     }
 };
-
 export default DishDetail;
