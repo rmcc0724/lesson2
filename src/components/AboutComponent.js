@@ -7,6 +7,27 @@ import { Fade, Stagger } from 'react-animation-components';
 
 
 const RenderLeader = ({ leader }) => {
+    
+        if (leader.isLoading) {
+        return (
+            <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+        );
+    }
+    else if (leader.errMess) {
+        return (
+            <div className="container">
+                    <div className="row">            
+                        <h4>{leader.errMess}</h4>
+                    </div>
+                </div>
+        );
+    }
+    else if (leader.leaders != null) {
+    
     return (
                        <div className="col-12 row">    
                        <Stagger in>
@@ -30,28 +51,10 @@ const RenderLeader = ({ leader }) => {
 </div>
 
     );
-};
+}};
 const About = (props) => {
 
-    if (props.isLoading) {
-        return (
-            <div className="container">
-                    <div className="row">            
-                        <Loading />
-                    </div>
-                </div>
-        );
-    }
-    else if (props.errMess) {
-        return (
-            <div className="container">
-                    <div className="row">            
-                        <h4>{props.errMess}</h4>
-                    </div>
-                </div>
-        );
-    }
-    else if (props.leaders != null) {
+
         return (
             <div className="container">
             <div className="row">
@@ -112,6 +115,5 @@ const About = (props) => {
             </div>
         </div>
         );
-    }
-};
+    };
 export default About;
